@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if ('webkitSpeechRecognition' in window) {
                 recognition = new webkitSpeechRecognition();
-            }else if ('SpeechRecognition' in window) {
+            } else if ('SpeechRecognition' in window) {
                 recognition = new SpeechRecognition();
             } else {
                 alert("Sorry, your browser does not support speech recognition.");
@@ -105,15 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             recognition.onend = () => {
-                if (isRecording) {
-                    recognition.start();
-                } else {
-                    startBtn.disabled = false;
-                    stopBtn.disabled = true;
-                    downloadBtn.disabled = finalTranscript.length === 0;
-                    if (audioVisualizer) {
-                        audioVisualizer.stop();
-                    }
+                isRecording = false;
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                downloadBtn.disabled = finalTranscript.length === 0;
+                if (audioVisualizer) {
+                    audioVisualizer.stop();
                 }
             };
 
@@ -144,7 +141,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             stopBtn.addEventListener("click", () => {
                 if (isRecording) {
+                    isRecording = false;
                     recognition.stop();
+                    if (audioVisualizer) {
+                        audioVisualizer.stop();
+                    }
                 }
             });
 
