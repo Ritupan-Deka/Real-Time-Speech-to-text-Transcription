@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(stream => {
             console.log('Microphone access granted');
 
-            if ('SpeechRecognition' in window) {
-                recognition = new SpeechRecognition();
-            } else if ('webkitSpeechRecognition' in window) {
+            if ('webkitSpeechRecognition' in window) {
                 recognition = new webkitSpeechRecognition();
+            }else if ('SpeechRecognition' in window) {
+                recognition = new SpeechRecognition();
             } else {
                 alert("Sorry, your browser does not support speech recognition.");
                 return;
