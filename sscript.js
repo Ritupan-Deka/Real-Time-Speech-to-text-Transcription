@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let isRecording = false;
     let finalTranscript = '';
     let audioVisualizer = null;
-
     
     if ('SpeechRecognition' in window) {
         recognition = new SpeechRecognition();
@@ -107,6 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
         downloadBtn.disabled = finalTranscript.length === 0;
         if (audioVisualizer) {
             audioVisualizer.stop();
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Speech Recognition Error:', event.error);
+        if (event.error === 'no-speech' || event.error === 'audio-capture' || event.error === 'network') {
+            recognition.stop();
+        }
+    };
+
+    recognition.onend = () => {
+        if (isRecording) {
+            recognition.start();
         }
     };
 
