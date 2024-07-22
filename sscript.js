@@ -68,10 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalTranscript = '';
     let audioVisualizer = null;
 
-    // Request microphone access
-    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-        .then(stream => {
-            console.log('Microphone access granted');
+    // // Request microphone access
+    // navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    //     .then(stream => {
+    //         console.log('Microphone access granted');
 
             if ('webkitSpeechRecognition' in window) {
                 recognition = new webkitSpeechRecognition();
@@ -161,8 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 URL.revokeObjectURL(url);
             });
         })
-        .catch(error => {
-            console.error('Error accessing microphone:', error);
-            alert('Microphone access is required for speech recognition to work.');
-        });
+        // .catch(error => {
+        //     console.error('Error accessing microphone:', error);
+        //     alert('Microphone access is required for speech recognition to work.');
+        // });
 });
