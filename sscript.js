@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadBtn = document.getElementById("downloadBtn");
     const transcriptArea = document.getElementById("transcript");
     let recognition;
-    let isRecording = false;
+    let isRecording = true;
     let finalTranscript = '';
     let audioVisualizer = null;
 
