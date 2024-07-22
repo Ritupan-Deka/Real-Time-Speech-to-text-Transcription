@@ -67,94 +67,101 @@ document.addEventListener("DOMContentLoaded", () => {
     let isRecording = false;
     let finalTranscript = '';
     let audioVisualizer = null;
-    
-    if ('SpeechRecognition' in window) {
-        recognition = new SpeechRecognition();
-    } else if ('webkitSpeechRecognition' in window) {
-        recognition = new webkitSpeechRecognition();
-    } else {
-        alert("Sorry, your browser does not support speech recognition.");
-        return;
-    }
 
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
+    // Request microphone access
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        .then(stream => {
+            console.log('Microphone access granted');
 
-    recognition.onresult = (event) => {
-        let interimTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-                finalTranscript += event.results[i][0].transcript;
+            if ('SpeechRecognition' in window) {
+                recognition = new SpeechRecognition();
+            } else if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
             } else {
-                interimTranscript += event.results[i][0].transcript;
+                alert("Sorry, your browser does not support speech recognition.");
+                return;
             }
-        }
-        transcriptArea.value = finalTranscript;
-    };
 
-    recognition.onstart = () => {
-        isRecording = true;
-        startBtn.disabled = true;
-        stopBtn.disabled = false;
-    };
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
 
-    recognition.onend = () => {
-        isRecording = false;
-        startBtn.disabled = false;
-        stopBtn.disabled = true;
-        downloadBtn.disabled = finalTranscript.length === 0;
-        if (audioVisualizer) {
-            audioVisualizer.stop();
-        }
-    };
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                transcriptArea.value = finalTranscript;
+            };
 
-    recognition.onerror = (event) => {
-        console.error('Speech Recognition Error:', event.error);
-        if (event.error === 'no-speech' || event.error === 'audio-capture' || event.error === 'network') {
-            recognition.stop();
-        }
-    };
+            recognition.onstart = () => {
+                isRecording = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+            };
 
-    recognition.onend = () => {
-        if (isRecording) {
-            recognition.start();
-        }
-    };
-
-    startBtn.addEventListener("click", () => {
-        if (!isRecording) {
-            recognition.start();
-            const audioContext = new AudioContext();
-            const dataMap = { 0: 15, 1: 10, 2: 8, 3: 9, 4: 6, 5: 5, 6: 2, 7: 1, 8: 0, 9: 4, 10: 3, 11: 7, 12: 11, 13: 12, 14: 13, 15: 14 };
-            const processFrame = (data) => {
-                const values = Object.values(data);
-                for (let i = 0; i < visualValueCount; ++i) {
-                    const value = values[dataMap[i]] / 255;
-                    const elmStyles = visualElements[i].style;
-                    elmStyles.transform = `scaleY(${value})`;
-                    elmStyles.opacity = Math.max(.25, value);
+            recognition.onend = () => {
+                if (isRecording) {
+                    recognition.start();
+                } else {
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    downloadBtn.disabled = finalTranscript.length === 0;
+                    if (audioVisualizer) {
+                        audioVisualizer.stop();
+                    }
                 }
             };
-            audioVisualizer = initAudioVisualizer(audioContext, processFrame);
-        }
-    });
 
-    stopBtn.addEventListener("click", () => {
-        if (isRecording) {
-            recognition.stop();
-        }
-    });
+            recognition.onerror = (event) => {
+                console.error('Speech Recognition Error:', event.error);
+                if (event.error === 'no-speech' || event.error === 'audio-capture' || event.error === 'network') {
+                    recognition.stop();
+                }
+            };
 
-    downloadBtn.addEventListener("click", () => {
-        const blob = new Blob([finalTranscript], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'transcript.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    });
+            startBtn.addEventListener("click", () => {
+                if (!isRecording) {
+                    recognition.start();
+                    const audioContext = new AudioContext();
+                    const dataMap = { 0: 15, 1: 10, 2: 8, 3: 9, 4: 6, 5: 5, 6: 2, 7: 1, 8: 0, 9: 4, 10: 3, 11: 7, 12: 11, 13: 12, 14: 13, 15: 14 };
+                    const processFrame = (data) => {
+                        const values = Object.values(data);
+                        for (let i = 0; i < visualValueCount; ++i) {
+                            const value = values[dataMap[i]] / 255;
+                            const elmStyles = visualElements[i].style;
+                            elmStyles.transform = `scaleY(${value})`;
+                            elmStyles.opacity = Math.max(.25, value);
+                        }
+                    };
+                    audioVisualizer = initAudioVisualizer(audioContext, processFrame);
+                }
+            });
+
+            stopBtn.addEventListener("click", () => {
+                if (isRecording) {
+                    recognition.stop();
+                }
+            });
+
+            downloadBtn.addEventListener("click", () => {
+                const blob = new Blob([finalTranscript], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'transcript.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        })
+        .catch(error => {
+            console.error('Error accessing microphone:', error);
+            alert('Microphone access is required for speech recognition to work.');
+        });
 });
