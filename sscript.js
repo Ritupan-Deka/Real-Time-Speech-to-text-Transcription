@@ -68,15 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalTranscript = '';
     let audioVisualizer = null;
 
-    while (true){ 
-        if ('SpeechRecognition' in window) {
-            recognition = new SpeechRecognition();
-        } else if ('webkitSpeechRecognition' in window) {
-            recognition = new webkitSpeechRecognition();
-        } else {
-            alert("Sorry, your browser does not support speech recognition.");
-            return;
-    }}
+    
+    if ('SpeechRecognition' in window) {
+        recognition = new SpeechRecognition();
+    } else if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+    } else {
+        alert("Sorry, your browser does not support speech recognition.");
+        return;
+    }
 
     recognition.continuous = true;
     recognition.interimResults = true;
