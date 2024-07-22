@@ -64,18 +64,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadBtn = document.getElementById("downloadBtn");
     const transcriptArea = document.getElementById("transcript");
     let recognition;
-    let isRecording = true;
+    let isRecording = false;
     let finalTranscript = '';
     let audioVisualizer = null;
 
-    if ('SpeechRecognition' in window) {
-        recognition = new SpeechRecognition();
-    } else if ('webkitSpeechRecognition' in window) {
-        recognition = new webkitSpeechRecognition();
-    } else {
-        alert("Sorry, your browser does not support speech recognition.");
-        return;
-    }
+    while (true){ 
+        if ('SpeechRecognition' in window) {
+            recognition = new SpeechRecognition();
+        } else if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+        } else {
+            alert("Sorry, your browser does not support speech recognition.");
+            return;
+    }}
 
     recognition.continuous = true;
     recognition.interimResults = true;
