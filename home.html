@@ -1,0 +1,35 @@
+<!-- {% load static %} -->
+
+<!doctype html>
+<html>
+
+<head>
+    <title>Speech Recognition Demo</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" href="{% static 'css/jun.css' %}"> -->
+    <link rel="stylesheet" href="/KOTHA/speech_app/static/css/jun.css">
+</head>
+
+<body>
+    <div class="nanum-gothic-regular">A real-time transcribing platform that will convert the audio speech into text
+        format</div>
+    <main></main>
+    <!-- <form method="post">
+        {% csrf_token %} -->
+    <container>
+        <button type="submit" id="startBtn">START</button>
+        <button type="submit" id="stopBtn" disabled>STOP</button>
+        <!-- </form> -->
+        <textarea id="transcript" placeholder="Your transcribed text will appear here..."></textarea>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <button id="downloadBtn" class="download">DOWNLOAD</button>
+        <!-- <br><br><br><br><br><br><br><br><br><br><br> -->
+        <div><a style="color: rgb(43, 144, 195);" href="recorded/">click here for recorded transcription</a></div>
+    </container>
+</body>
+<!-- <script src="{% static 'js/sscript.js' %}"></script> -->
+<script src="/KOTHA/speech_app/static/js/sscript.js"></script>
+
+</html>
