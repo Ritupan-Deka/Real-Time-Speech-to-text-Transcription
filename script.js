@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalTranscript = '';
     let audioVisualizer = null;
 
-
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
     } else if ('SpeechRecognition' in window) {
@@ -105,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         isRecording = false;
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        downloadBtn.disabled = false;
+        downloadBtn.disabled = finalTranscript.length === 0;
         if (audioVisualizer) {
             audioVisualizer.stop();
         }
