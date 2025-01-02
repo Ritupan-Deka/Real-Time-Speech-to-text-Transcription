@@ -16,6 +16,15 @@ body {
     background: #000000;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
 .nanum-gothic-regular {
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 500;
@@ -41,7 +50,7 @@ visualizer > div {
     opacity: 0.25;
 }
 
-button{
+button {
     width: 8em;
     height: 2.5em;
     margin: 10px;
@@ -84,7 +93,7 @@ main.error {
     white-space: pre-line;
 }
 
-textarea{
+textarea {
     height: 20rem;
     width: 50rem;
     margin: 20px auto;
@@ -94,9 +103,7 @@ textarea{
     font-size: large;
     font-family: "Nanum Gothic", sans-serif;
     font-style: italic;
-
 }
-
 
 @media (max-width: 600px) {
     .nanum-gothic-regular {
@@ -109,7 +116,7 @@ textarea{
         font-size: 0.9em;
     }
 
-    textarea{
+    textarea {
         height: 10rem;
         width: 24rem;
     }
