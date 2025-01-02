@@ -11,16 +11,19 @@
 </head>
 
 <body>
-    <div class="nanum-gothic-regular">A real-time transcribing platform that will convert the audio speech into text
-        format</div>
-    <main></main>
-    <div>
-        <button type="submit" id="startBtn">START</button>
-        <button type="submit" id="stopBtn" disabled>STOP</button>
-        <textarea id="transcript" placeholder="Your transcribed text will appear here..."></textarea>
-        <button id="downloadBtn" class="download">DOWNLOAD</button>
+    <div class="nanum-gothic-regular">
+        A real-time transcribing platform that will convert the audio speech into text format
     </div>
+    <main>
+        <visualizer></visualizer>
+        <section>
+            <button type="submit" id="startBtn">START</button>
+            <button type="submit" id="stopBtn" disabled>STOP</button>
+            <button type="submit" id="downloadBtn" class="button">DOWNLOAD</button>
+        </section>
+        <textarea id="transcript" placeholder="Your transcribed text will appear here..."></textarea>
+    </main>
+    <script src="./script.js"></script>
 </body>
-<script src="./script.js"></script>
 
 </html>

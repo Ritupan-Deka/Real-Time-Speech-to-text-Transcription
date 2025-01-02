@@ -1,8 +1,16 @@
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     color: #ffffff;
     background: #000000;
@@ -12,25 +20,43 @@ body {
     font-family: "Nanum Gothic", sans-serif;
     font-weight: 500;
     text-transform: uppercase;
-    padding: 75px;
+    padding: 20px;
     color: #ffffff;
     opacity: 0.85;
 }
 
-button {
-    width: 5em;
-    height: 2em;
-    margin-top: 20px;
-    margin-left: 5em;
-    padding: .5em .5em;
-    color: #bbb4b4;
+visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+visualizer > div {
+    width: 3px;
+    height: 100px;
+    margin: 0 7px;
+    background: currentColor;
+    transform: scaleY(.65);
+    opacity: 0.25;
+}
+
+button{
+    width: 8em;
+    height: 2.5em;
+    margin: 10px;
+    padding: .5em;
     background: #262525;
+    color: #bbb4b4;
     border: 1px solid #929090;
-    border-radius: 20px;
+    border-radius: 0.2rem;
     font-size: 1em;
     cursor: pointer;
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
     transition: box-shadow .4s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 button:hover {
@@ -38,24 +64,16 @@ button:hover {
 }
 
 button:disabled {
-    background-color: #d32d2d;
+    background-color: #732424;
     cursor: not-allowed;
 }
 
 main {
-
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-main>div {
-    width: 3px;
-    height: 100px;
-    margin: 0 7px;
-    background: currentColor;
-    transform: scaleY(.65);
-    opacity: 0.25;
+    flex-direction: column;
+    width: 100%;
 }
 
 main.error {
@@ -66,41 +84,33 @@ main.error {
     white-space: pre-line;
 }
 
-#transcript {
-    position: fixed;
-    margin-left: 27%;
-    font-size: x-large;
-}
-
-textarea {
-    display: block;
+textarea{
+    height: 20rem;
+    width: 50rem;
     margin: 20px auto;
-    height: 250px;
-    width: 50%;
+    padding: 1rem;
     border-radius: 6px;
     border: 1px solid #ede6e6;
+    font-size: large;
     font-family: "Nanum Gothic", sans-serif;
-    font-size: medium;
     font-style: italic;
+
 }
 
-.download {
-    display: block;
-    margin: 20px auto;
-    width: 7em;
-    height: 2em;
-    padding: .5em .5em;
-    color: #bbb4b4;
-    background: #cc1010;
-    border: 1px solid #929090;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
-    transition: box-shadow .4s;
-}
 
-.download:hover {
-    background: #940505;
-    box-shadow: 0 0 10px 0px rgba(72, 21, 21, 0.75);
+@media (max-width: 600px) {
+    .nanum-gothic-regular {
+        font-size: 1.2em;
+    }
+
+    button {
+        width: 8em;
+        height: 2em;
+        font-size: 0.9em;
+    }
+
+    textarea{
+        height: 10rem;
+        width: 24rem;
+    }
 }

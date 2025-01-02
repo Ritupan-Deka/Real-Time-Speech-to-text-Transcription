@@ -40,7 +40,7 @@ class AudioVisualizer {
     }
 }
 
-const visualMainElement = document.querySelector('main');
+const visualMainElement = document.querySelector('visualizer');
 const visualValueCount = 16;
 let visualElements;
 
@@ -98,13 +98,14 @@ document.addEventListener("DOMContentLoaded", () => {
         isRecording = true;
         startBtn.disabled = true;
         stopBtn.disabled = false;
+        downloadBtn.disabled = true;
     };
 
     recognition.onend = () => {
         isRecording = false;
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        downloadBtn.disabled = finalTranscript.length === 0;
+        downloadBtn.disabled = false;
         if (audioVisualizer) {
             audioVisualizer.stop();
         }
