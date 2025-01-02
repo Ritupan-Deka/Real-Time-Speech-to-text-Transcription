@@ -150,8 +150,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const blob = new Blob([finalTranscript], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         a.href = url;
-        a.download = 'transcript.txt';
+        a.download = `transcript(${timestamp}).txt`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
