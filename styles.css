@@ -85,10 +85,10 @@ textarea {
 }
 
 .download {
-    top: 72%;
+    display: block;
+    margin: 20px auto;
     width: 7em;
     height: 2em;
-    margin-left: 595px;
     padding: .5em .5em;
     color: #bbb4b4;
     background: #cc1010;
