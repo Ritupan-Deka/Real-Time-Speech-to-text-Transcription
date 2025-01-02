@@ -49,7 +49,7 @@ const createDOMElements = () => {
         const elm = document.createElement('div');
         visualMainElement.appendChild(elm);
     }
-    visualElements = document.querySelectorAll('main div');
+    visualElements = document.querySelectorAll('visualizer div');
 };
 
 createDOMElements();
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 interimTranscript += event.results[i][0].transcript;
             }
         }
-        transcriptArea.value = finalTranscript;
+        transcriptArea.value = finalTranscript + interimTranscript;
     };
 
     recognition.onstart = () => {

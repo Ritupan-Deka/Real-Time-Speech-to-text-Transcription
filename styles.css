@@ -5,10 +5,9 @@
 }
 
 body {
-
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     color: #ffffff;
     background: #000000;
